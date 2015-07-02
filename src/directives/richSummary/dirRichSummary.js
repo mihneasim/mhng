@@ -15,6 +15,7 @@
 
         return {
             restrict: 'E',
+            transclude: true,
             scope: {
                 title: '=',
                 images: '=',
@@ -54,6 +55,6 @@
 
     function SummaryTemplateInstaller($templateCache) {
         $templateCache.put('mhng.directives.richSummary.template',
-                           '');
+                           '<div class="rich-summary"><h3 ng-bind="title"></h3><summary ng-bind="caption"></summary><img ng-href="images[0]" /><div class="img-thumb" ng-repeat="image in images"><img ng-href="image" /></div></div>');
     }
 })();
