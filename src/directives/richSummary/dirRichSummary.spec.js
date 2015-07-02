@@ -1,6 +1,7 @@
 describe('richSummary directive', function() {
 
-    var scope,
+    var jq = angular.element,
+        scope,
         top;
 
     beforeEach(module('mhng.directives.richSummary'));
@@ -11,7 +12,7 @@ describe('richSummary directive', function() {
         scope.title = 'How Queen embraced Disco, conquered America, then bit the dust';
         scope.caption = 'In 1980, ‘The Game’ became Queen’s biggest hit album in America, yet the record’s success ushered in a dramatic fall in popularity';
 
-        top = angular.element('<rich-summary images=images title=title caption=caption></rich-summary>');
+        top = jq('<rich-summary images=images title=title caption=caption></rich-summary>');
         $compile(top)(scope);
         scope.$apply();
         top[0].focus();
@@ -21,13 +22,17 @@ describe('richSummary directive', function() {
     it('should show title, caption, image', function() {
         var title = top.find('h3'),
             caption = top.find('summary'),
-            images = top.find('img'),
-            jq = angular.element;
+            images = top.find('img');
         expect(title.length).toBe(1);
         expect(title[0].innerText).toMatch(/^How Queen Embraced/);
         expect(caption[0].innerText).toMatch(/^In 1980,/);
         expect(images.length).toBe(5);
         expect(jq(images[0]).attr('src')).toBe(jq(images[1]).attr('src'));
+    });
+
+    it('should change primary image on hover', function() {
+        jq(top.find('img')[3]).triggerHandler('mouseover');
+        expect(jq(images[0]).attr('src')).toBe(jq(images[3]).attr('src'));
     });
 
 });
