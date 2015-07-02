@@ -6,6 +6,7 @@
 
     angular.module('mhng.directives.richSummary', [])
         .provider('richSummaryTemplate', SummaryTemplateProvider)
+        .filter('capitalizeWords', CapitalizeWordsFilter)
         .directive('richSummary', SummaryDirective)
         .run(SummaryTemplateInstaller);
 
@@ -55,6 +56,16 @@
 
     function SummaryTemplateInstaller($templateCache) {
         $templateCache.put('mhng.directives.richSummary.template',
-                           '<div class="rich-summary"><h3 ng-bind="title"></h3><summary ng-bind="caption"></summary><img ng-href="images[0]" /><div class="img-thumb" ng-repeat="image in images"><img ng-href="image" /></div></div>');
+                           '<div class="rich-summary"><h3 ng-bind="title|capitalizeWords"></h3><summary ng-bind="caption"></summary><img ng-href="images[0]" /><div class="img-thumb" ng-repeat="image in images"><img ng-href="image" /></div></div>');
+    }
+
+    function CapitalizeWordsFilter() {
+        return function (input) {
+            if (input) {
+                return input.replace(/\w\S*/g, function(txt) {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                });
+            }
+        };
     }
 })();
