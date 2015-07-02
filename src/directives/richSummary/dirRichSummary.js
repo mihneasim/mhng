@@ -1,17 +1,17 @@
-/** dirSummary - nifty component displaying summary
+/** dirRichSummary - a nifty component displaying summary
  * of a resource containing one or more images, title, caption
  */
 
 (function (){
 
-    angular.module('ngmhn.directives.summary', [])
-        .provider('summaryTemplate', SummaryTemplateProvider)
-        .directive('summary', SummaryDirective)
+    angular.module('mhng.directives.richSummary', [])
+        .provider('richSummaryTemplate', SummaryTemplateProvider)
+        .directive('richSummary', SummaryDirective)
         .run(SummaryTemplateInstaller);
 
-    SummaryDirective.$inject = ['SummaryTemplate'];
+    SummaryDirective.$inject = ['richSummaryTemplate'];
 
-    function SummaryDirective(SummaryTemplate) {
+    function SummaryDirective(richSummaryTemplate) {
 
         return {
             restrict: 'E',
@@ -22,7 +22,7 @@
             },
             link: LinkFunction,
             templateUrl: function (elem, attrs) {
-                return attrs.templateUrl || summaryTemplate.getPath();
+                return attrs.templateUrl || richSummaryTemplate.getPath();
             }
         };
 
@@ -34,7 +34,7 @@
 
     function SummaryTemplateProvider() {
 
-        var templatePath = 'mhng.directives.summary.template';
+        var templatePath = 'mhng.directives.richSummary.template';
 
         this.setPath = function (path) {
             templatePath = path;
@@ -53,7 +53,7 @@
     SummaryTemplateInstaller.$inject = ['$templateCache'];
 
     function SummaryTemplateInstaller($templateCache) {
-        $templateCache.put('mhng.directives.summary.template',
+        $templateCache.put('mhng.directives.richSummary.template',
                            '');
     }
 })();
