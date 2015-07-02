@@ -19,6 +19,14 @@ describe('richSummary directive', function() {
     }));
 
     it('should show title, caption, image', function() {
+        var title = top.find('h3'),
+            caption = top.find('summary'),
+            images = top.find('img');
+        expect(title.length).toBe(1);
+        expect(title[0].text).toMatch(/^How Queen Embraced/);
+        expect(caption[0].text).toMatch(/^In 1980,/);
+        expect(images.length).toBe(5);
+        expect(images[0].attr('src')).toBe(images[1].attr('src'));
     });
 
 });
