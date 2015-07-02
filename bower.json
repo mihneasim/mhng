@@ -1,0 +1,26 @@
+{
+  "name": "mhng",
+  "version": "0.0.1",
+  "homepage": "https://github.com/mihneasim/mhng",
+  "authors": [
+    "Mihnea Simian <contact@mesimian.com>"
+  ],
+  "description": "Just another collection of AngularJS utilities",
+  "main": "src/mhng.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "~0.2.15",
+    "angular": "~1.4.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.1"
+  }
+}
