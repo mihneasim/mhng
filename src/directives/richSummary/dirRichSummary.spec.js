@@ -27,11 +27,13 @@ describe('richSummary directive', function() {
         expect(title[0].innerText).toMatch(/^How Queen Embraced/);
         expect(caption[0].innerText).toMatch(/^In 1980,/);
         expect(images.length).toBe(5);
+        expect(jq(images[0]).attr('src')).toBe('me1.jpg');
         expect(jq(images[0]).attr('src')).toBe(jq(images[1]).attr('src'));
     });
 
     it('should change primary image on hover', function() {
-        jq(top.find('img')[3]).triggerHandler('mouseover');
+        var images = top.find('img');
+        jq(images[3]).triggerHandler('mouseover');
         expect(jq(images[0]).attr('src')).toBe(jq(images[3]).attr('src'));
     });
 
