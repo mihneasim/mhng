@@ -69,7 +69,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['jshint', 'html2js', 'karma']);
+    grunt.registerTask('default', ['jshint', 'html2js', 'karma:unit']);
     grunt.registerTask('debug', ['jshint', 'html2js', 'karma:debug']);
 
 };

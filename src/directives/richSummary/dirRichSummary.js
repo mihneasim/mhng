@@ -29,7 +29,7 @@
         };
 
         function LinkFunction($scope, $element, attrs) {
-
+            $scope.poster = {src: $scope.images[0]};
         }
 
     }
@@ -56,7 +56,7 @@
 
     function SummaryTemplateInstaller($templateCache) {
         $templateCache.put('mhng.directives.richSummary.template',
-                           '<div class="rich-summary"><h3 ng-bind="title|capitalizeWords"></h3><summary ng-bind="caption"></summary><img ng-src="{{images[0]}}" /><div class="img-thumb" ng-repeat="image in images"><img ng-src="{{image}}" /></div></div>');
+                           '<div class="rich-summary"><h3 ng-bind="title|capitalizeWords"></h3><summary ng-bind="caption"></summary><img ng-src="{{poster.src}}" /><div class="img-thumb" ng-repeat="image in images"><img ng-src="{{image}}" ng-mouseover="poster.src=image" /></div></div>');
     }
 
     function CapitalizeWordsFilter() {
