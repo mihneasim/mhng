@@ -50,6 +50,12 @@ module.exports = function(grunt) {
                     'src/**/*.js'
                 ],
                 tasks: [ 'default' ]
+            },
+            sass: {
+                files: [
+                    'src/**/*.scss'
+                ],
+                tasks: ['sass']
             }
         },
 
@@ -57,10 +63,21 @@ module.exports = function(grunt) {
             //options: {
             //},
             main: {
-              src: ['src/**/*.tpl.html'],
-              dest: 'tmp/templates.js'
+                src: ['src/**/*.tpl.html'],
+                dest: 'tmp/templates.js'
             }
-          }
+        },
+
+        sass: {
+            options: {
+                sourceMap: true
+            },
+            dist: {
+                files: {
+                    'src/directives/richSummary/styles.css': 'src/directives/richSummary/styles.scss'
+                }
+            }
+        }
 
     });
 
@@ -69,8 +86,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-sass');
 
     grunt.registerTask('default', ['jshint', 'html2js', 'karma:unit']);
     grunt.registerTask('debug', ['jshint', 'html2js', 'karma:debug']);
+    grunt.registerTask('build', ['jshint', 'sass']);
 
 };
