@@ -56,7 +56,17 @@
 
     function SummaryTemplateInstaller($templateCache) {
         $templateCache.put('mhng.directives.richSummary.template',
-                           '<div class="rich-summary"><h3 ng-bind="title|capitalizeWords"></h3><summary ng-bind="caption"></summary><img ng-src="{{poster.src}}" /><div class="img-thumb" ng-repeat="image in images"><img ng-src="{{image}}" ng-mouseover="poster.src=image" /></div></div>');
+            '<div class="rich-summary">' +
+            '<div class="poster" ng-style="{backgroundImage: \'url(\'+poster.src+\')\'}">' +
+            '</div>' +
+            '<div class="img-thumbs">' +
+            '<div class="img-thumb" ng-style="{backgroundImage: \'url(\'+image+\')\'}"' +
+            '    ng-repeat="image in images" ng-mouseover="poster.src=image">' +
+            '</div>' +
+            '</div>' +
+            '<h3 ng-bind="title|capitalizeWords"></h3>' +
+            '<summary ng-bind="caption"></summary>' +
+            '</div>');
     }
 
     function CapitalizeWordsFilter() {
