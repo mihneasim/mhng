@@ -45,4 +45,12 @@ describe('richSummary directive', function() {
         expect(getPoster()).toBe(jq(thumbs[3]).css('backgroundImage'));
     });
 
+    it('should work with touch as it does with hover', function() {
+        //TODO
+    });
+
+    it('should use separate thumbnails when provided', function() {
+        //TODO
+    });
+
 });
