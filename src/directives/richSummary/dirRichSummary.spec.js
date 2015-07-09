@@ -2,10 +2,12 @@ describe('richSummary directive', function() {
 
     var jq = angular.element,
         scope,
-        top;
+        top,
+        $compile;
 
     beforeEach(module('mhng.directives.richSummary'));
-    beforeEach(inject(function($compile, $rootScope) {
+    beforeEach(inject(function(_$compile_, $rootScope) {
+        $compile = _$compile_;
         scope = $rootScope;
 
         scope.images = ['me1.jpg', 'me2.jpg', 'me3.png', 'me4.gif'];
@@ -22,7 +24,6 @@ describe('richSummary directive', function() {
     it('should show title, caption, image', function() {
         var title = top.find('h3'),
             caption = top.find('summary'),
-            images = top.find('img'),
             divs = top.find('div'),
             poster = jq(divs[1]).css('backgroundImage'),
             thumbs = _(divs).filter(function (x) {
@@ -50,7 +51,26 @@ describe('richSummary directive', function() {
     });
 
     it('should use separate thumbnails when provided', function() {
-        //TODO
+        var divs, poster, thumbs, getPoster, getThumbImg;
+
+        scope.thumbnails = ['th1.jpg', 'th2.jpg', 'th3.jpg', 'th4.jpg'];
+        top = jq('<rich-summary images=images title=title caption=caption thumbnails=thumbnails></rich-summary>');
+        $compile(top)(scope);
+        scope.$apply();
+
+        divs = top.find('div');
+        getPoster = function() { return jq(divs[1]).css('backgroundImage'); };
+        thumbs = _(divs).filter(function (x) {
+            return x.className.match(/\bimg\-thumb\b/); }).value();
+        getThumbImg = function(ind) { return jq(thumbs[ind]).css('backgroundImage'); };
+
+        expect(getPoster()).toMatch(/url\(.*me1\.jpg\)/);
+        expect(getThumbImg(0)).toMatch(/url\(.*th1\.jpg\)/);
+
+        jq(thumbs[3]).triggerHandler('mouseover');
+        expect(getThumbImg(3)).toMatch(/url\(.*th4\.jpg\)/);
+        expect(getPoster()).toMatch(/url\(.*me4\.gif\)/);
+
     });
 
 });
