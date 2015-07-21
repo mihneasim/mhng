@@ -25,4 +25,14 @@
         background-position: center;
         background-size: cover;
     }
+
+    a {
+        color: inherit;
+        text-decoration: inherit;
+    }
+
+}
+
+.rich-summary:hover {
+    background-color: #FCFCF4;
 }
