@@ -5,7 +5,7 @@
 </head>
 <body ng-app="App">
     <div style='width: 640px;'>
-        <rich-summary title="title" images="images" caption="caption"></rich-summary>
+        <rich-summary title="title" images="images" caption="caption" href="href"></rich-summary>
     </div>
     <script src="bower_components/angular/angular.js"></script>
     <script src="src/directives/richSummary/dirRichSummary.js"></script>
@@ -16,6 +16,7 @@
                                  'img/4.jpg', 'img/5.jpg'];
             $rootScope.title = 'It\'s about to rain .. now!';
             $rootScope.caption = 'This is the untold story of a race weekend as a traveler. Forget about drivers, teams, points and sports, and focus on sensations.';
+            $rootScope.href = '#target_url';
         }]);
     </script>
 </body>

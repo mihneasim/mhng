@@ -19,6 +19,7 @@
             transclude: true,
             scope: {
                 title: '=',
+                href: '=',
                 images: '=',
                 thumbnails: '=',
                 caption: '='
@@ -63,14 +64,14 @@
         $templateCache.put('mhng.directives.richSummary.template',
             '<div class="rich-summary">' +
             '<div class="poster" ng-style="{backgroundImage: \'url(\'+poster.src+\')\'}">' +
-            '</div>' +
+            '<a></a></div>' +
             '<div class="img-thumbs">' +
             '<div class="img-thumb" ng-style="{backgroundImage: \'url(\'+image+\')\'}"' +
             '    ng-repeat="image in negotiatedThumbnails" ng-mouseover="poster.src=images[$index]">' +
             '</div>' +
             '</div>' +
-            '<h3 ng-bind="title|capitalizeWords"></h3>' +
-            '<summary ng-bind="caption"></summary>' +
+            '<h3><a ng-bind="title|capitalizeWords" ng-href="{{href}}"></a></h3>' +
+            '<summary><a ng-bind="caption"></a></summary>' +
             '</div>');
     }
 
