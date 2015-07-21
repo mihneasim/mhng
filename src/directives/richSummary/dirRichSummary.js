@@ -20,6 +20,7 @@
             scope: {
                 title: '=',
                 images: '=',
+                thumbnails: '=',
                 caption: '='
             },
             link: LinkFunction,
@@ -30,6 +31,10 @@
 
         function LinkFunction($scope, $element, attrs) {
             $scope.poster = {src: $scope.images[0]};
+            $scope.negotiatedThumbnails = $scope.images;
+            if ($scope.thumbnails && $scope.thumbnails.length === $scope.images.length) {
+                $scope.negotiatedThumbnails = $scope.thumbnails;
+            }
         }
 
     }
@@ -61,7 +66,7 @@
             '</div>' +
             '<div class="img-thumbs">' +
             '<div class="img-thumb" ng-style="{backgroundImage: \'url(\'+image+\')\'}"' +
-            '    ng-repeat="image in images" ng-mouseover="poster.src=image">' +
+            '    ng-repeat="image in negotiatedThumbnails" ng-mouseover="poster.src=images[$index]">' +
             '</div>' +
             '</div>' +
             '<h3 ng-bind="title|capitalizeWords"></h3>' +
