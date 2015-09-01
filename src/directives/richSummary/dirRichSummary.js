@@ -31,8 +31,12 @@
         };
 
         function LinkFunction($scope, $element, attrs) {
-            $scope.poster = {src: $scope.images[0]};
-            $scope.negotiatedThumbnails = $scope.images;
+            if ($scope.images && $scope.images.length) {
+                $scope.poster = {src: $scope.images[0]};
+            } else {
+                $scope.poster = {src: ''};
+            }
+            $scope.negotiatedThumbnails = $scope.images || [];
             if ($scope.thumbnails && $scope.thumbnails.length === $scope.images.length) {
                 $scope.negotiatedThumbnails = $scope.thumbnails;
             }
