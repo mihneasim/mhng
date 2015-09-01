@@ -45,7 +45,7 @@
 
         function ControllerFunction($scope) {
             $scope.$watchCollection([$scope.images, $scope.thumbnails],
-                    function(newV, oldV) { LinkFunction($scope) });
+                    function(newV, oldV) { LinkFunction($scope); });
         }
 
     }

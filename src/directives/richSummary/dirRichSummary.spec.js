@@ -76,7 +76,7 @@ describe('richSummary directive', function() {
     });
 
     it('should not crash with undefined values', function() {
-        var divs, poster, thumbs, getPoster, getThumbImg;
+        var divs;
 
         scope.thumbnails = undefined;
         scope.images = undefined;
@@ -87,6 +87,19 @@ describe('richSummary directive', function() {
         scope.$apply();
 
         divs = top.find('div');
+    });
+
+    it('should be able to limit thumbs', function () {
+        // TODO
+    });
+
+    it('should strip html tags', function () {
+        var caption;
+        scope.caption = '<p>This uses <b>HTML</b></p>';
+        $compile(top)(scope);
+        scope.$apply();
+        caption = top.find('summary').find('a');
+        expect(caption[0].innerText).toMatch(/^This uses HTML$/);
     });
 
 });
