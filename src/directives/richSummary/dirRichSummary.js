@@ -7,6 +7,7 @@
     angular.module('mhng.directives.richSummary', [])
         .provider('richSummaryTemplate', SummaryTemplateProvider)
         .filter('capitalizeWords', CapitalizeWordsFilter)
+        .filter('stripHTML', StripHTMLFilter)
         .directive('richSummary', SummaryDirective)
         .run(SummaryTemplateInstaller);
 
@@ -80,8 +81,8 @@
             '    ng-repeat="image in negotiatedThumbnails" ng-mouseover="poster.src=images[$index]">' +
             '</div>' +
             '</div>' +
-            '<h3><a ng-bind="title|capitalizeWords" ng-href="{{ href }}"></a></h3>' +
-            '<summary><a ng-bind="caption" ng-href="{{ href }}"></a></summary>' +
+            '<h3><a ng-bind="title|stripHTML|capitalizeWords" ng-href="{{ href }}"></a></h3>' +
+            '<summary><a ng-bind="caption|stripHTML" ng-href="{{ href }}"></a></summary>' +
             '</div>');
     }
 
@@ -91,6 +92,14 @@
                 return input.replace(/\w\S*/g, function(txt) {
                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                 });
+            }
+        };
+    }
+
+    function StripHTMLFilter() {
+        return function (input) {
+            if (input) {
+                return input.replace(/<[^>]+>/gm, '');
             }
         };
     }
