@@ -75,4 +75,18 @@ describe('richSummary directive', function() {
 
     });
 
+    it('should not crash with undefined values', function() {
+        var divs, poster, thumbs, getPoster, getThumbImg;
+
+        scope.thumbnails = undefined;
+        scope.images = undefined;
+        scope.title = undefined;
+        scope.caption = undefined;
+        top = jq('<rich-summary images=images title=title caption=caption thumbnails=thumbnails></rich-summary>');
+        $compile(top)(scope);
+        scope.$apply();
+
+        divs = top.find('div');
+    });
+
 });
