@@ -23,7 +23,8 @@
                 href: '=',
                 images: '=',
                 thumbnails: '=',
-                caption: '='
+                caption: '=',
+                limit: '='
             },
             link: LinkFunction,
             controller: ControllerFunction,
@@ -78,7 +79,7 @@
             '<a ng-href="{{ href }}"></a></div>' +
             '<div class="img-thumbs">' +
             '<div class="img-thumb" ng-style="{backgroundImage: \'url(\'+image+\')\'}"' +
-            '    ng-repeat="image in negotiatedThumbnails" ng-mouseover="poster.src=images[$index]">' +
+            '    ng-repeat="image in negotiatedThumbnails| limitTo: limit || 20" ng-mouseover="poster.src=images[$index]">' +
             '</div>' +
             '</div>' +
             '<h3><a ng-bind="title|stripHTML|capitalizeWords" ng-href="{{ href }}"></a></h3>' +
