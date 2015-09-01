@@ -25,12 +25,13 @@
                 caption: '='
             },
             link: LinkFunction,
+            controller: ControllerFunction,
             templateUrl: function (elem, attrs) {
                 return attrs.templateUrl || richSummaryTemplate.getPath();
             }
         };
 
-        function LinkFunction($scope, $element, attrs) {
+        function LinkFunction($scope) {
             if ($scope.images && $scope.images.length) {
                 $scope.poster = {src: $scope.images[0]};
             } else {
@@ -40,6 +41,11 @@
             if ($scope.thumbnails && $scope.thumbnails.length === $scope.images.length) {
                 $scope.negotiatedThumbnails = $scope.thumbnails;
             }
+        }
+
+        function ControllerFunction($scope) {
+            $scope.$watchCollection([$scope.images, $scope.thumbnails],
+                    function(newV, oldV) { LinkFunction($scope) });
         }
 
     }
