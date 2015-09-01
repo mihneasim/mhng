@@ -90,7 +90,15 @@ describe('richSummary directive', function() {
     });
 
     it('should be able to limit thumbs', function () {
-        // TODO
+        var thumbs, divs;
+        scope.limit = 2;
+        top = jq('<rich-summary limit=limit images=images title=title caption=caption href=href></rich-summary>');
+        $compile(top)(scope);
+        scope.$apply();
+        divs = top.find('div');
+        thumbs = _(divs).filter(function (x) {
+            return x.className.match(/\bimg\-thumb\b/); }).value();
+        expect(thumbs.length).toBe(2);
     });
 
     it('should strip html tags', function () {
